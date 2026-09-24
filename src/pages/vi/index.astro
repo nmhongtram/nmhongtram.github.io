@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PortfolioPage from "../../components/PortfolioPage.astro";
+import { profile } from "../../data/portfolio";
+---
+
+<BaseLayout
+  locale="vi"
+  title={`${profile.name} | Nghiên cứu AI`}
+  description="Portfolio nghiên cứu của Nguyen Mai Hong Tram về học đa phương thức, hiểu video và trí tuệ lấy hành động làm trung tâm."
+>
+  <PortfolioPage locale="vi" />
+</BaseLayout>

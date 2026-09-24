@@ -1,0 +1,537 @@
+---
+import JourneyGraphic from "./JourneyGraphic.astro";
+import * as en from "../data/portfolio";
+import * as vi from "../data/portfolio.vi";
+import { labels } from "../data/ui";
+
+interface Props {
+  locale?: "en" | "vi";
+}
+const { locale = "en" } = Astro.props;
+const {
+  profile,
+  journey,
+  interests,
+  research,
+  optimization,
+  publications,
+  experience,
+  education,
+  gradeMind,
+} = locale === "vi" ? vi : en;
+const t = labels[locale];
+---
+
+<div class="site-shell">
+  <header class="site-header">
+    <a
+      class="brand"
+      href="#top"
+      aria-label={`${profile.name}, ${t.backToTop.toLowerCase()}`}
+    >
+      NMHT<span class="brand-mark">/</span>
+    </a>
+    <nav class="desktop-nav" aria-label={t.primaryNavigation}>
+      <a href="#journey">{t.journeyNav}</a>
+      <a href="#research">{t.researchNav}</a>
+      <a href="#publications">{t.publicationsNav}</a>
+      <a href="#experience">{t.experienceNav}</a>
+      <a href="#projects">{t.projectsNav}</a>
+      <a href="#about">{t.aboutNav}</a>
+    </nav>
+    <div class="header-controls">
+      <div class="language-switch" role="group" aria-label={t.language}>
+        <a
+          href="/"
+          lang="en"
+          aria-current={locale === "en" ? "page" : undefined}
+        >
+          EN
+        </a>
+        <span aria-hidden="true">|</span>
+        <a
+          href="/vi/"
+          lang="vi"
+          aria-current={locale === "vi" ? "page" : undefined}
+        >
+          VI
+        </a>
+      </div>
+      <button
+        class="theme-toggle"
+        type="button"
+        aria-label={t.darkMode}
+        title={t.darkMode}
+        data-label-dark={t.darkMode}
+        data-label-light={t.lightMode}
+      >
+        <svg
+          class="icon-moon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M20.3 15.7A8.6 8.6 0 0 1 8.3 3.7 8.7 8.7 0 1 0 20.3 15.7Z" />
+        </svg>
+        <svg
+          class="icon-sun"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+        </svg>
+      </button>
+      <a class="header-cv" href={profile.cv} target="_blank" rel="noopener">
+        {t.readCv} <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <details class="mobile-menu">
+      <summary>{t.menu}</summary>
+      <nav aria-label={t.mobileNavigation}>
+        <a href="#journey">{t.journeyNav}</a>
+        <a href="#research">{t.researchNav}</a>
+        <a href="#publications">{t.publicationsNav}</a>
+        <a href="#experience">{t.experienceNav}</a>
+        <a href="#projects">{t.projectsNav}</a>
+        <a href="#about">{t.aboutNav}</a>
+      </nav>
+    </details>
+  </header>
+
+  <main id="main">
+    <section class="hero section-wrap" id="top" aria-labelledby="hero-title">
+      <div class="hero-stars" aria-hidden="true">
+        <span class="hero-star"></span>
+        <span class="hero-star"></span>
+        <span class="hero-star"></span>
+        <span class="hero-star"></span>
+        <span class="hero-star"></span>
+        <span class="hero-star"></span>
+        <span class="hero-star"></span>
+        <span class="hero-star"></span>
+        <span class="hero-star"></span>
+        <span class="hero-star"></span>
+        <span class="hero-star"></span>
+        <span class="hero-star"></span>
+        <span class="hero-star"></span>
+        <span class="hero-star"></span>
+        <span class="hero-star"></span>
+      </div>
+      <div class="hero-main">
+        <p class="hero-name">{profile.name}</p>
+        <h1 id="hero-title">{profile.headline}</h1>
+        <p class="hero-summary">{profile.summary}</p>
+        <div class="hero-actions">
+          <a
+            class="primary-action"
+            href={profile.cv}
+            target="_blank"
+            rel="noopener"
+          >
+            {t.readMyCv} <span aria-hidden="true">↗</span>
+          </a>
+          <a class="quiet-action" href="#journey">
+            {t.exploreJourney} <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+      </div>
+      <p class="hero-footnote">
+        {t.multimodal} <span>/</span> {t.video} <span>/</span> {t.action}
+      </p>
+    </section>
+
+    <section
+      class="journey section-wrap"
+      id="journey"
+      aria-labelledby="journey-title"
+      data-active-stage={journey[0].id}
+    >
+      <div class="section-heading journey-heading">
+        <h2 id="journey-title">{t.journeyTitle}</h2>
+        <p>{t.journeyIntro}</p>
+      </div>
+      <div class="journey-layout">
+        <div class="journey-stages">
+          {journey.map((stage, index) => (
+            <article class="journey-stage" data-stage={stage.id}>
+              <button
+                type="button"
+                class="stage-button"
+                data-select-stage={stage.id}
+                aria-pressed={index === 0 ? "true" : "false"}
+                aria-controls="journey-visuals"
+              >
+                <span class="stage-ordinal">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span class="stage-titles">
+                  <span>{stage.concept}</span>
+                  <strong>{stage.title}</strong>
+                </span>
+                <span class="stage-arrow" aria-hidden="true">
+                  ↗
+                </span>
+              </button>
+              <div class="stage-copy">
+                <h3>{stage.question}</h3>
+                <p>{stage.note}</p>
+              </div>
+              <div class="stage-inline-visual">
+                <JourneyGraphic stage={stage} locale={locale} />
+              </div>
+            </article>
+          ))}
+        </div>
+        <div
+          class="journey-visual-wrap"
+          id="journey-visuals"
+          aria-live="polite"
+        >
+          {journey.map((stage, index) => (
+            <div
+              class="journey-visual"
+              data-visual={stage.id}
+              hidden={index !== 0}
+            >
+              <p class="visual-title">{stage.concept}</p>
+              <JourneyGraphic stage={stage} locale={locale} />
+              <p class="visual-question">{stage.question}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <p class="journey-close">{t.journeyClose}</p>
+    </section>
+
+    <section
+      class="interests section-wrap"
+      id="interests"
+      aria-labelledby="interests-title"
+    >
+      <div class="section-heading">
+        <h2 id="interests-title">{t.interestsTitle}</h2>
+        <p>{t.interestsIntro}</p>
+      </div>
+      <div class="interest-list">
+        {interests.map((interest) => (
+          <div class="interest-item">
+            <h3>{interest.title}</h3>
+            <p>{interest.detail}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section
+      class="research section-wrap"
+      id="research"
+      aria-labelledby="research-title"
+    >
+      <div class="section-heading">
+        <h2 id="research-title">{t.researchTitle}</h2>
+        <p>{t.researchIntro}</p>
+      </div>
+      <div class="research-list">
+        {research.map((work) => (
+          <article class="research-item" id={work.id}>
+            <div class="research-meta">
+              <span>{work.field}</span>
+              <span>{work.status}</span>
+            </div>
+            <div class="research-body">
+              <div class="research-lead">
+                <h3>{work.title}</h3>
+                <p class="research-question">{work.question}</p>
+              </div>
+              <div class="research-detail">
+                <div>
+                  <h4>{t.contribution}</h4>
+                  <p>{work.contribution}</p>
+                </div>
+                <div>
+                  <h4>{t.evidence}</h4>
+                  <p>{work.evidence}</p>
+                </div>
+                <p class="research-context">{work.context}</p>
+                {work.link && (
+                  <a
+                    class="inline-link"
+                    href={work.link}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    {work.linkLabel} <span aria-hidden="true">↗</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section
+      class="optimization section-wrap"
+      id="optimization"
+      aria-labelledby="optimization-title"
+    >
+      <div class="optimization-inner">
+        <div class="section-heading">
+          <h2 id="optimization-title">{t.optimizationTitle}</h2>
+          <p>{t.optimizationIntro}</p>
+        </div>
+        <div class="optimization-body">
+          <div>
+            <h3>{optimization.title}</h3>
+            <p class="optimization-question">{optimization.question}</p>
+          </div>
+          <div>
+            <p>{optimization.contribution}</p>
+            <p>{optimization.evidence}</p>
+            <p class="optimization-recognition">{optimization.recognition}</p>
+            <a
+              class="inline-link"
+              href={optimization.link}
+              target="_blank"
+              rel="noopener"
+            >
+              {t.exploreCode} <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="publications section-wrap"
+      id="publications"
+      aria-labelledby="publications-title"
+    >
+      <div class="section-heading">
+        <h2 id="publications-title">{t.publicationsTitle}</h2>
+        <p>{t.publicationsIntro}</p>
+      </div>
+      <div class="publication-list">
+        {publications.map((publication) => (
+          <article class="publication-item">
+            <span class="publication-year">{publication.year}</span>
+            <div>
+              <h3>{publication.title}</h3>
+              <p>{publication.venue}</p>
+              <p class="publication-status">{publication.status}</p>
+            </div>
+            <a
+              class="inline-link"
+              href={publication.href}
+              target="_blank"
+              rel="noopener"
+            >
+              {publication.linkLabel} <span aria-hidden="true">↗</span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section
+      class="experience section-wrap"
+      id="experience"
+      aria-labelledby="experience-title"
+    >
+      <div class="section-heading">
+        <h2 id="experience-title">{t.experienceTitle}</h2>
+        <p>{t.experienceIntro}</p>
+      </div>
+      <div class="experience-list">
+        {experience.map((entry) => (
+          <article class="experience-item">
+            <p class="experience-period">{entry.period}</p>
+            <div>
+              <h3>{entry.role}</h3>
+              <p class="experience-organization">{entry.organization}</p>
+              <p>{entry.summary}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section
+      class="projects section-wrap"
+      id="projects"
+      aria-labelledby="projects-title"
+    >
+      <div class="section-heading">
+        <h2 id="projects-title">{t.projectsTitle}</h2>
+        <p>{t.projectsIntro}</p>
+      </div>
+      <article class="project-item">
+        <div>
+          <h3>{gradeMind.title}</h3>
+          <p class="project-subtitle">{gradeMind.subtitle}</p>
+          <p>{gradeMind.program}</p>
+        </div>
+        <div>
+          <p>{gradeMind.summary}</p>
+          <a
+            class="inline-link"
+            href={gradeMind.demo}
+            target="_blank"
+            rel="noopener"
+          >
+            {t.viewDemo} <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </article>
+    </section>
+
+    <section
+      class="about section-wrap"
+      id="about"
+      aria-labelledby="about-title"
+    >
+      <div class="section-heading">
+        <h2 id="about-title">{t.aboutTitle}</h2>
+      </div>
+      <div class="about-layout">
+        <div>
+          <h3>{education.degree}</h3>
+          <p>{education.institution}</p>
+          <p>{education.period}</p>
+        </div>
+        <div class="education-proof">
+          <p>
+            <strong>{education.gpa}</strong>
+            <span>GPA</span>
+          </p>
+          <p>
+            <strong>{education.rank}</strong>
+            <span>{education.schoolRank}</span>
+          </p>
+        </div>
+      </div>
+      <ul class="program-list">
+        {education.programs.map((program) => (
+          <li>{program}</li>
+        ))}
+      </ul>
+    </section>
+
+    <footer class="contact section-wrap" id="contact">
+      <h2>{t.contactTitle}</h2>
+      <p>{t.contactIntro}</p>
+      <a class="contact-email" href={`mailto:${profile.email}`}>
+        {profile.email} <span aria-hidden="true">↗</span>
+      </a>
+      <div class="footer-links">
+        <a href={profile.cv} target="_blank" rel="noopener">
+          CV
+        </a>
+        <a href={profile.github} target="_blank" rel="noopener">
+          GitHub
+        </a>
+        <a href={profile.linkedin} target="_blank" rel="noopener">
+          LinkedIn
+        </a>
+        <a href="#top">{t.backToTop}</a>
+      </div>
+      <p class="footer-credit">
+        {profile.name} · {profile.location}
+      </p>
+    </footer>
+  </main>
+</div>
+
+<script>
+  const themeToggle =
+    document.querySelector<HTMLButtonElement>(".theme-toggle");
+  const updateThemeButton = () => {
+    if (!themeToggle) return;
+    const isDark = document.documentElement.dataset.theme === "dark";
+    const label = isDark
+      ? themeToggle.dataset.labelLight
+      : themeToggle.dataset.labelDark;
+    themeToggle.setAttribute("aria-label", label ?? "");
+    themeToggle.title = label ?? "";
+    themeToggle.setAttribute("aria-pressed", String(isDark));
+  };
+  updateThemeButton();
+  themeToggle?.addEventListener("click", () => {
+    const next =
+      document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    try {
+      localStorage.setItem("portfolio-theme", next);
+    } catch {}
+    document
+      .querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+      ?.setAttribute("content", next === "dark" ? "#111c1c" : "#f1f5f0");
+    updateThemeButton();
+  });
+
+  const journeyElement = document.querySelector<HTMLElement>(".journey");
+  if (journeyElement) {
+    const buttons = [
+      ...journeyElement.querySelectorAll<HTMLButtonElement>(
+        "[data-select-stage]",
+      ),
+    ];
+    const panels = [
+      ...journeyElement.querySelectorAll<HTMLElement>("[data-visual]"),
+    ];
+    const stages = [
+      ...journeyElement.querySelectorAll<HTMLElement>("[data-stage]"),
+    ];
+    const setActive = (id: string) => {
+      journeyElement.dataset.activeStage = id;
+      buttons.forEach((button) =>
+        button.setAttribute(
+          "aria-pressed",
+          String(button.dataset.selectStage === id),
+        ),
+      );
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.visual !== id;
+      });
+    };
+    let manualSelectionUntil = 0;
+    buttons.forEach((button) =>
+      button.addEventListener("click", () => {
+        manualSelectionUntil = performance.now() + 1200;
+        setActive(button.dataset.selectStage ?? "");
+      }),
+    );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (
+          window.matchMedia("(max-width: 760px)").matches ||
+          performance.now() < manualSelectionUntil
+        )
+          return;
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0])
+          setActive((visible[0].target as HTMLElement).dataset.stage ?? "");
+      },
+      { rootMargin: "-18% 0px -38% 0px", threshold: [0, 0.25, 0.5, 0.75] },
+    );
+    stages.forEach((stage) => observer.observe(stage));
+  }
+  const menu = document.querySelector<HTMLDetailsElement>(".mobile-menu");
+  menu?.querySelectorAll("a").forEach((link) =>
+    link.addEventListener("click", () => {
+      menu.open = false;
+    }),
+  );
+</script>

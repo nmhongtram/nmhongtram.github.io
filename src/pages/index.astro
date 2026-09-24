@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PortfolioPage from "../components/PortfolioPage.astro";
+import { profile } from "../data/portfolio";
+---
+
+<BaseLayout
+  title={`${profile.name} | AI Research Portfolio`}
+  description="Research portfolio for Nguyen Mai Hong Tram, exploring multimodal learning, video understanding, and action-centric intelligence."
+>
+  <PortfolioPage locale="en" />
+</BaseLayout>
