@@ -1169,13 +1169,13 @@ main {
     font-size: 0.68rem;
   }
   .site-shell {
-    --dossier-rail-width: 190px;
+    --dossier-rail-width: 224px;
   }
   .site-header {
-    width: 190px;
+    width: 224px;
   }
   main {
-    margin-left: 190px;
+    margin-left: 224px;
   }
 }
 @media (max-width: 850px) {
@@ -1714,16 +1714,21 @@ html[data-theme="dark"] .skip-link {
   gap: 34px;
 }
 .role-switch {
-  display: grid;
-  gap: 3px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
   padding: 14px 0;
+  white-space: nowrap;
+}
+.role-switch span {
+  color: var(--muted);
 }
 .role-switch a {
   width: fit-content;
   color: var(--muted);
-  font-size: 0.77rem;
+  font-size: 0.7rem;
   font-weight: 750;
   text-decoration: none;
   padding: 5px 0;

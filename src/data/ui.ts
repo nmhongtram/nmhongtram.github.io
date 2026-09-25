@@ -2,7 +2,7 @@ export const labels = {
   en: {
     siteName: "Nguyen Mai Hong Tram portfolio",
     portfolioViews: "Portfolio view",
-    researchView: "Research",
+    researchView: "AI Researcher",
     engineerView: "AI Engineer",
     buildsNav: "Selected builds",
     capabilitiesNav: "Capabilities",
@@ -66,8 +66,8 @@ export const labels = {
   vi: {
     siteName: "Portfolio Nguyen Mai Hong Tram",
     portfolioViews: "Vai trò",
-    researchView: "Nghiên cứu",
-    engineerView: "Kỹ sư AI",
+    researchView: "AI Researcher",
+    engineerView: "AI Engineer",
     buildsNav: "Dự án",
     capabilitiesNav: "Năng lực",
     recognitionNav: "Ghi nhận",
