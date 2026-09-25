@@ -26,7 +26,7 @@ The site is a bilingual static Astro portfolio. Research lives at / and /vi/; AI
 - GradeMind is text-only on the page and may link to its existing public demo.
 - TMA numerical claims remain off the site until their definitions and timing setup are verified.
 - VinRobotics code and labeled data remain private.
-- Air Quality Forecasting has a public repository but no running demo.
+- Air Quality Forecasting is a UEH group project with a public repository and no running demo. The owner confirms implementing its technical pipeline end to end.
 - Public project claims must distinguish personal contribution, team outcomes, dataset scale, and evaluation setup.
 
 ## Evidence on Hand

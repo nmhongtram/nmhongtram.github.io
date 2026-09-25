@@ -118,8 +118,8 @@ for (const route of routes) {
           failures.push(`${route.path}: Journey selection failed`);
       }
     } else {
-      if ((await page.locator(".engineer-build").count()) < 3)
-        failures.push(`${route.path} ${name}: missing selected builds`);
+      if ((await page.locator(".engineer-build").count()) !== 4)
+        failures.push(`${route.path} ${name}: expected four selected builds`);
       if (
         (await page.locator(".primary-action").getAttribute("href")) !==
         "#builds"

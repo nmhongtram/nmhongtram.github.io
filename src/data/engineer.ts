@@ -87,6 +87,29 @@ export const engineerBuilds = [
     link: works.gnn.code,
     linkLabel: engineerCopy.code,
   },
+  {
+    id: "air-quality",
+    title: works.airQuality.title,
+    subtitle: "Forecasting prototype · UEH course group project",
+    problem:
+      "Forecast air quality from OpenAQ measurements and make predictions available through an API and monitoring dashboard.",
+    contribution:
+      "I implemented the technical pipeline end to end: OpenAQ ingestion and preprocessing, RNN/LSTM/GRU training, FastAPI inference, a Streamlit dashboard, and Docker packaging.",
+    approach:
+      "Compared recurrent forecasting models and connected model inference to a dashboard through a containerized API.",
+    evidence:
+      "The public repository contains the implementation, setup steps, and model evaluation. The hosted demo is no longer running.",
+    tools: [
+      "OpenAQ",
+      "PyTorch",
+      "RNN/LSTM/GRU",
+      "FastAPI",
+      "Streamlit",
+      "Docker",
+    ],
+    link: works.airQuality.code,
+    linkLabel: engineerCopy.code,
+  },
 ] as const;
 
 export const engineerExperience = experience.slice(0, 2);

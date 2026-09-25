@@ -61,7 +61,13 @@ const {
       </div>
       <div class="engineer-build-list">
         {builds.map((build) => (
-          <article class="engineer-build" id={build.id}>
+          <article
+            class:list={[
+              "engineer-build",
+              { "engineer-build-supporting": build.id === "air-quality" },
+            ]}
+            id={build.id}
+          >
             <div class="engineer-build-heading">
               <h3>{build.title}</h3>
               <p>{build.subtitle}</p>

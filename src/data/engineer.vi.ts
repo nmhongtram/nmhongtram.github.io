@@ -73,6 +73,20 @@ export const engineerBuilds = [
     evidence: research[0].evidence,
     linkLabel: engineerCopy.code,
   },
+  {
+    ...en.engineerBuilds[3],
+    title: "Quy trình dự báo chất lượng không khí",
+    subtitle: "Bản thử nghiệm dự báo · đồ án nhóm tại UEH",
+    problem:
+      "Dự báo chất lượng không khí từ dữ liệu OpenAQ và cung cấp kết quả qua API cùng bảng theo dõi.",
+    contribution:
+      "Tôi trực tiếp triển khai toàn bộ phần kỹ thuật: thu thập và xử lý dữ liệu OpenAQ, huấn luyện RNN/LSTM/GRU, suy luận qua FastAPI, bảng theo dõi Streamlit và đóng gói Docker.",
+    approach:
+      "So sánh các mô hình dự báo chuỗi thời gian rồi kết nối suy luận với bảng theo dõi qua API được đóng gói bằng container.",
+    evidence:
+      "Repo công khai có mã nguồn, hướng dẫn chạy và đánh giá mô hình. Demo trực tuyến hiện không còn hoạt động.",
+    linkLabel: engineerCopy.code,
+  },
 ] as const;
 
 export const engineerExperience = experience.slice(0, 2);

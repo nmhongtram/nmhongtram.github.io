@@ -125,6 +125,10 @@ export const works = {
     program: "Vingroup × VinUniversity Applied AI Talent Program capstone",
     demo: "https://demo.edufun.ai/p/team-506-grademind-tro-ly-cham-phan-hoi-cho-giao-vien-toan",
   },
+  airQuality: {
+    title: "Air Quality Forecasting Pipeline",
+    code: "https://github.com/nmhongtram/air-quality-forecasting",
+  },
 } as const;
 
 export const journey = [
