@@ -1,5 +1,6 @@
 ---
 import SiteHeader from "./SiteHeader.astro";
+import { labels } from "../data/ui";
 import * as en from "../data/engineer";
 import * as vi from "../data/engineer.vi";
 
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const { locale } = Astro.props;
+const phoneLabel = labels[locale].phoneLabel;
 const {
   engineerProfile: profile,
   engineerCopy: t,
@@ -198,9 +200,15 @@ const {
     <footer class="contact section-wrap" id="contact">
       <h2>{t.contactTitle}</h2>
       <p>{t.contactIntro}</p>
-      <a class="contact-email" href={`mailto:${profile.email}`}>
-        {profile.email} <span aria-hidden="true">↗</span>
-      </a>
+      <div class="contact-methods">
+        <a class="contact-email" href={`mailto:${profile.email}`}>
+          {profile.email} <span aria-hidden="true">↗</span>
+        </a>
+        <a class="contact-phone" href={profile.phone.href}>
+          <span class="contact-phone-label">{phoneLabel}</span>
+          {profile.phone.display} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
       <div class="footer-links">
         <a href={profile.cv} target="_blank" rel="noopener">
           CV

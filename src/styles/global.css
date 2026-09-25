@@ -748,6 +748,30 @@ html[data-theme="dark"] .site-shell {
   max-width: 560px;
   margin: 26px 0;
 }
+.contact-methods {
+  display: grid;
+  justify-items: start;
+  gap: 18px;
+}
+.contact-phone {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--accent);
+  font-size: clamp(1rem, 2vw, 1.45rem);
+  font-weight: 700;
+  text-decoration: none;
+}
+.contact-phone-label {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 750;
+}
+.contact-phone span[aria-hidden] {
+  color: var(--accent);
+}
 .contact-email {
   display: inline-flex;
   gap: 15px;

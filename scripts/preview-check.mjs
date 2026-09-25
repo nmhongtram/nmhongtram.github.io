@@ -72,6 +72,13 @@ for (const route of routes) {
     if ((await page.locator(".header-cv").getAttribute("href")) !== route.cv)
       failures.push(`${route.path} ${name}: CV link mismatch`);
 
+    const phone = page.locator(".contact-phone");
+    if (
+      (await phone.getAttribute("href")) !== "tel:+84375851104" ||
+      !(await phone.textContent())?.includes("+84 37 585 1104")
+    )
+      failures.push(`${route.path} ${name}: phone contact mismatch`);
+
     const currentRole = await page
       .locator(".role-switch a[aria-current='page']")
       .getAttribute("href");

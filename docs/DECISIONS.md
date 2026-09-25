@@ -8,6 +8,7 @@ Working record for the grill-with-docs interview. Confirmed decisions came direc
 - Desired first action: read the CV. If the portfolio demonstrates potential, the reviewer should be able to contact the owner easily.
 - The first screen should contain research identity text and the CV action. Its approved main line is “I study how AI understands actions, time, and interaction.” Do not place a separate Best Paper / rank / internship highlight strip or a portrait/abstract hero image there; show those facts in their relevant sections.
 - The recently added public CV source is research_cv.tex. Its email address is the preferred public contact; it also contains LinkedIn and GitHub details.
+- The owner approved publishing the phone number shown in both updated CV PDFs on the Research and AI Engineer pages. Display +84 37 585 1104 and link it as tel:+84375851104; keep the email path visible.
 - A Google Scholar profile exists, but its URL will be added later. Do not show a placeholder link in version one.
 - There is no PDF in the repository yet. The main CV action should open a PDF compiled from the current TeX source when the site is built.
 

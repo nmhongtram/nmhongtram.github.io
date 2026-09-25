@@ -6,6 +6,7 @@ export const profile = {
     "My research has evolved from computer vision and medical visual question answering toward multimodal and video understanding, with recent work on temporally grounded action understanding in egocentric video.",
   location: "Ho Chi Minh City, Vietnam",
   email: "nguyenmaihongtram2004@gmail.com",
+  phone: { display: "+84 37 585 1104", href: "tel:+84375851104" },
   cv: "/cv.pdf",
   github: "https://github.com/nmhongtram",
   linkedin: "https://www.linkedin.com/in/nmhongtram/",
