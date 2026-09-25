@@ -16,3 +16,14 @@ These definitions keep the content model precise during the interview.
 | Contribution | Work the owner personally performed on a research item. | Separate it from team-level results and publication authorship. |
 | Evidence or learning | A verified result, artifact, observation, or lesson supporting the research story. | Use only information approved for public display. |
 | Concept graphic | A site-drawn illustration of an idea or stage in the Journey. | It is not a research figure, result, source image, or data visualization; label it clearly. |
+
+## AI Engineer portfolio terms
+
+These terms support ADR 005; any open evidence questions remain in that decision record.
+
+| Term | Working meaning | Boundary |
+| --- | --- | --- |
+| Role view | A route and narrative tailored to research admissions or engineering hiring. | Both views describe the same person and reuse verified facts. |
+| Selected build | An implemented system explained through problem, personal contribution, technical decisions, and evidence. | A short case summary does not require a standalone project page. |
+| Artifact | A public item a visitor can inspect, such as source code, a demo, or a paper. | Do not imply an artifact exists when there is no public link. |
+| Engineering evidence | A reproducible result or concrete implementation detail supporting a system claim. | Dataset scale is not evaluation sample size; a prototype is not automatically a live service. |
