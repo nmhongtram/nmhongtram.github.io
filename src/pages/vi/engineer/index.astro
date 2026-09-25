@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import EngineerPage from "../../../components/EngineerPage.astro";
+import { engineerProfile } from "../../../data/engineer.vi";
+---
+
+<BaseLayout
+  locale="vi"
+  role="engineer"
+  title={`${engineerProfile.name} | Portfolio Kỹ sư AI`}
+  description="Portfolio kỹ sư AI của Nguyen Mai Hong Tram: hệ thống đa phương thức ứng dụng, suy luận trên trình duyệt và đánh giá mô hình."
+>
+  <EngineerPage locale="vi" />
+</BaseLayout>

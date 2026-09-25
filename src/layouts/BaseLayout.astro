@@ -9,9 +9,12 @@ interface Props {
   title: string;
   description: string;
   locale?: "en" | "vi";
+  role?: "research" | "engineer";
 }
 
-const { title, description, locale = "en" } = Astro.props;
+const { title, description, locale = "en", role = "research" } = Astro.props;
+const englishHref = role === "engineer" ? "/engineer/" : "/";
+const vietnameseHref = role === "engineer" ? "/vi/engineer/" : "/vi/";
 ---
 
 <!doctype html>
@@ -36,8 +39,8 @@ const { title, description, locale = "en" } = Astro.props;
             "#111c1c";
       } catch {}
     </script>
-    <link rel="alternate" hreflang="en" href="/" />
-    <link rel="alternate" hreflang="vi" href="/vi/" />
+    <link rel="alternate" hreflang="en" href={englishHref} />
+    <link rel="alternate" hreflang="vi" href={vietnameseHref} />
     <title>{title}</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>

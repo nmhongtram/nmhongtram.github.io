@@ -1,0 +1,215 @@
+---
+import SiteHeader from "./SiteHeader.astro";
+import * as en from "../data/engineer";
+import * as vi from "../data/engineer.vi";
+
+interface Props {
+  locale: "en" | "vi";
+}
+
+const { locale } = Astro.props;
+const {
+  engineerProfile: profile,
+  engineerCopy: t,
+  engineerBuilds: builds,
+  engineerExperience: experience,
+  engineerPublications: publications,
+  engineerCapabilities: capabilities,
+} = locale === "vi" ? vi : en;
+---
+
+<div class="site-shell engineer-page">
+  <SiteHeader locale={locale} role="engineer" cv={profile.cv} />
+  <main id="main">
+    <section
+      class="engineer-hero section-wrap"
+      id="top"
+      aria-labelledby="engineer-title"
+    >
+      <div class="engineer-hero-copy">
+        <p class="hero-name">{profile.name}</p>
+        <h1 id="engineer-title">{profile.headline}</h1>
+        <p class="hero-summary">{profile.summary}</p>
+        <div class="hero-actions">
+          <a class="primary-action" href="#builds">
+            {t.explore} <span aria-hidden="true">↓</span>
+          </a>
+          <a
+            class="quiet-action"
+            href={profile.cv}
+            target="_blank"
+            rel="noopener"
+          >
+            {t.readCv} ↗
+          </a>
+        </div>
+      </div>
+      <p class="engineer-hero-foot">
+        OCR <span>/</span> RAG <span>/</span> VLM <span>/</span> Browser
+        inference
+      </p>
+    </section>
+
+    <section
+      class="engineer-builds section-wrap"
+      id="builds"
+      aria-labelledby="builds-title"
+    >
+      <div class="section-heading">
+        <h2 id="builds-title">{t.buildsTitle}</h2>
+        <p>{t.buildsIntro}</p>
+      </div>
+      <div class="engineer-build-list">
+        {builds.map((build) => (
+          <article class="engineer-build" id={build.id}>
+            <div class="engineer-build-heading">
+              <h3>{build.title}</h3>
+              <p>{build.subtitle}</p>
+              {build.link && (
+                <a
+                  class="inline-link"
+                  href={build.link}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  {build.linkLabel} <span aria-hidden="true">↗</span>
+                </a>
+              )}
+            </div>
+            <div class="engineer-build-detail">
+              <div>
+                <h4>{t.problem}</h4>
+                <p>{build.problem}</p>
+              </div>
+              <div>
+                <h4>{t.contribution}</h4>
+                <p>{build.contribution}</p>
+              </div>
+              <div>
+                <h4>{t.approach}</h4>
+                <p>{build.approach}</p>
+              </div>
+              <div>
+                <h4>{t.evidence}</h4>
+                <p>{build.evidence}</p>
+              </div>
+              <ul
+                class="engineer-tools"
+                aria-label={locale === "vi" ? "Công cụ" : "Tools"}
+              >
+                {build.tools.map((tool) => (
+                  <li>{tool}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))}
+      </div>
+      <a
+        class="engineer-cv-after-builds"
+        href={profile.cv}
+        target="_blank"
+        rel="noopener"
+      >
+        {t.readCv} <span aria-hidden="true">↗</span>
+      </a>
+    </section>
+
+    <section
+      class="engineer-experience section-wrap"
+      id="experience"
+      aria-labelledby="engineer-experience-title"
+    >
+      <div class="section-heading">
+        <h2 id="engineer-experience-title">{t.experienceTitle}</h2>
+        <p>{t.experienceIntro}</p>
+      </div>
+      <div class="experience-list">
+        {experience.map((entry) => (
+          <article class="experience-item">
+            <p class="experience-period">{entry.period}</p>
+            <div>
+              <h3>{entry.role}</h3>
+              <p class="experience-organization">{entry.organization}</p>
+              <p>{entry.summary}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section
+      class="engineer-capabilities section-wrap"
+      id="capabilities"
+      aria-labelledby="capabilities-title"
+    >
+      <div class="section-heading">
+        <h2 id="capabilities-title">{t.capabilitiesTitle}</h2>
+        <p>{t.capabilitiesIntro}</p>
+      </div>
+      <div class="engineer-capability-list">
+        {capabilities.map((item) => (
+          <div class="engineer-capability">
+            <h3>{item.title}</h3>
+            <p>{item.detail}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section
+      class="engineer-recognition section-wrap"
+      id="recognition"
+      aria-labelledby="recognition-title"
+    >
+      <div class="section-heading">
+        <h2 id="recognition-title">{t.recognitionTitle}</h2>
+        <p>{t.recognitionIntro}</p>
+      </div>
+      <div class="engineer-publication-list">
+        {publications.map((publication) => (
+          <article class="engineer-publication">
+            <p class="experience-period">{publication.year}</p>
+            <div>
+              <h3>{publication.title}</h3>
+              <p>
+                {publication.venue} · {publication.status}
+              </p>
+              <a
+                class="inline-link"
+                href={publication.href}
+                target="_blank"
+                rel="noopener"
+              >
+                {publication.linkLabel} <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <footer class="contact section-wrap" id="contact">
+      <h2>{t.contactTitle}</h2>
+      <p>{t.contactIntro}</p>
+      <a class="contact-email" href={`mailto:${profile.email}`}>
+        {profile.email} <span aria-hidden="true">↗</span>
+      </a>
+      <div class="footer-links">
+        <a href={profile.cv} target="_blank" rel="noopener">
+          CV
+        </a>
+        <a href={profile.github} target="_blank" rel="noopener">
+          GitHub
+        </a>
+        <a href={profile.linkedin} target="_blank" rel="noopener">
+          LinkedIn
+        </a>
+        <a href="#top">{t.backToTop}</a>
+      </div>
+      <p class="footer-credit">
+        {profile.name} · {profile.location}
+      </p>
+    </footer>
+  </main>
+</div>

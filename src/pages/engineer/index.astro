@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import EngineerPage from "../../components/EngineerPage.astro";
+import { engineerProfile } from "../../data/engineer";
+---
+
+<BaseLayout
+  role="engineer"
+  title={`${engineerProfile.name} | AI Engineer Portfolio`}
+  description="AI Engineer portfolio of Nguyen Mai Hong Tram: applied multimodal systems, browser inference, and model evaluation."
+>
+  <EngineerPage locale="en" />
+</BaseLayout>

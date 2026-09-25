@@ -1,5 +1,6 @@
 ---
 import JourneyGraphic from "./JourneyGraphic.astro";
+import SiteHeader from "./SiteHeader.astro";
 import * as en from "../data/portfolio";
 import * as vi from "../data/portfolio.vi";
 import { labels } from "../data/ui";
@@ -23,90 +24,7 @@ const t = labels[locale];
 ---
 
 <div class="site-shell">
-  <header class="site-header">
-    <a
-      class="brand"
-      href="#top"
-      aria-label={`${profile.name}, ${t.backToTop.toLowerCase()}`}
-    >
-      NMHT<span class="brand-mark">/</span>
-    </a>
-    <nav class="desktop-nav" aria-label={t.primaryNavigation}>
-      <a href="#journey">{t.journeyNav}</a>
-      <a href="#research">{t.researchNav}</a>
-      <a href="#publications">{t.publicationsNav}</a>
-      <a href="#experience">{t.experienceNav}</a>
-      <a href="#projects">{t.projectsNav}</a>
-      <a href="#about">{t.aboutNav}</a>
-    </nav>
-    <div class="header-controls">
-      <div class="language-switch" role="group" aria-label={t.language}>
-        <a
-          href="/"
-          lang="en"
-          aria-current={locale === "en" ? "page" : undefined}
-        >
-          EN
-        </a>
-        <span aria-hidden="true">|</span>
-        <a
-          href="/vi/"
-          lang="vi"
-          aria-current={locale === "vi" ? "page" : undefined}
-        >
-          VI
-        </a>
-      </div>
-      <button
-        class="theme-toggle"
-        type="button"
-        aria-label={t.darkMode}
-        title={t.darkMode}
-        data-label-dark={t.darkMode}
-        data-label-light={t.lightMode}
-      >
-        <svg
-          class="icon-moon"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M20.3 15.7A8.6 8.6 0 0 1 8.3 3.7 8.7 8.7 0 1 0 20.3 15.7Z" />
-        </svg>
-        <svg
-          class="icon-sun"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="4" />
-          <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-        </svg>
-      </button>
-      <a class="header-cv" href={profile.cv} target="_blank" rel="noopener">
-        {t.readCv} <span aria-hidden="true">↗</span>
-      </a>
-    </div>
-    <details class="mobile-menu">
-      <summary>{t.menu}</summary>
-      <nav aria-label={t.mobileNavigation}>
-        <a href="#journey">{t.journeyNav}</a>
-        <a href="#research">{t.researchNav}</a>
-        <a href="#publications">{t.publicationsNav}</a>
-        <a href="#experience">{t.experienceNav}</a>
-        <a href="#projects">{t.projectsNav}</a>
-        <a href="#about">{t.aboutNav}</a>
-      </nav>
-    </details>
-  </header>
+  <SiteHeader locale={locale} role="research" cv={profile.cv} />
 
   <main id="main">
     <section class="hero section-wrap" id="top" aria-labelledby="hero-title">
@@ -453,32 +371,6 @@ const t = labels[locale];
 </div>
 
 <script>
-  const themeToggle =
-    document.querySelector<HTMLButtonElement>(".theme-toggle");
-  const updateThemeButton = () => {
-    if (!themeToggle) return;
-    const isDark = document.documentElement.dataset.theme === "dark";
-    const label = isDark
-      ? themeToggle.dataset.labelLight
-      : themeToggle.dataset.labelDark;
-    themeToggle.setAttribute("aria-label", label ?? "");
-    themeToggle.title = label ?? "";
-    themeToggle.setAttribute("aria-pressed", String(isDark));
-  };
-  updateThemeButton();
-  themeToggle?.addEventListener("click", () => {
-    const next =
-      document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
-    try {
-      localStorage.setItem("portfolio-theme", next);
-    } catch {}
-    document
-      .querySelector<HTMLMetaElement>('meta[name="theme-color"]')
-      ?.setAttribute("content", next === "dark" ? "#111c1c" : "#f1f5f0");
-    updateThemeButton();
-  });
-
   const journeyElement = document.querySelector<HTMLElement>(".journey");
   if (journeyElement) {
     const buttons = [
@@ -528,10 +420,4 @@ const t = labels[locale];
     );
     stages.forEach((stage) => observer.observe(stage));
   }
-  const menu = document.querySelector<HTMLDetailsElement>(".mobile-menu");
-  menu?.querySelectorAll("a").forEach((link) =>
-    link.addEventListener("click", () => {
-      menu.open = false;
-    }),
-  );
 </script>

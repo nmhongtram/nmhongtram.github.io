@@ -1,5 +1,13 @@
 export const labels = {
   en: {
+    siteName: "Nguyen Mai Hong Tram portfolio",
+    portfolioViews: "Portfolio view",
+    researchView: "Research",
+    engineerView: "AI Engineer",
+    buildsNav: "Selected builds",
+    capabilitiesNav: "Capabilities",
+    recognitionNav: "Recognition",
+    contactNav: "Contact",
     primaryNavigation: "Primary navigation",
     mobileNavigation: "Mobile navigation",
     language: "Language",
@@ -55,6 +63,14 @@ export const labels = {
     skip: "Skip to content",
   },
   vi: {
+    siteName: "Portfolio Nguyen Mai Hong Tram",
+    portfolioViews: "Vai trò",
+    researchView: "Nghiên cứu",
+    engineerView: "Kỹ sư AI",
+    buildsNav: "Dự án",
+    capabilitiesNav: "Năng lực",
+    recognitionNav: "Ghi nhận",
+    contactNav: "Liên hệ",
     primaryNavigation: "Điều hướng chính",
     mobileNavigation: "Điều hướng trên di động",
     language: "Ngôn ngữ",
