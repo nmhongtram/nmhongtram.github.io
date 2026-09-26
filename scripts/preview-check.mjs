@@ -133,6 +133,54 @@ for (const route of routes) {
       )
         failures.push(`${route.path} ${name}: project-first action missing`);
     }
+    // Exercise the actual links in both directions, including missing CSS assets.
+    await page.route("**/*.css", (request) => request.abort());
+    for (const destination of [
+      route.role === "research"
+        ? route.locale === "vi"
+          ? "/vi/engineer/"
+          : "/engineer/"
+        : route.locale === "vi"
+          ? "/vi/"
+          : "/",
+      route.path,
+    ]) {
+      await Promise.all([
+        page.waitForURL(new URL(destination, base).href),
+        page.locator(".role-switch a:not([aria-current])").click(),
+      ]);
+      await page.evaluate(() => document.fonts.ready);
+      const header = await page.locator(".site-header").evaluate((element) => {
+        const nav = element.querySelector(".role-switch");
+        const links = [...nav.querySelectorAll("a")];
+        const boxes = links.map((link) => link.getBoundingClientRect());
+        return {
+          position: getComputedStyle(element).position,
+          display: getComputedStyle(nav).display,
+          horizontal: Math.abs(boxes[0].top - boxes[1].top) < 1,
+          fits: nav.scrollWidth <= nav.clientWidth + 1,
+          labels: links.map((link) => link.textContent.trim()).join(" | "),
+          active: nav
+            .querySelector("[aria-current='page']")
+            ?.getAttribute("href"),
+        };
+      });
+      if (
+        header.position !== (name === "desktop" ? "fixed" : "sticky") ||
+        header.display !== "flex" ||
+        !header.horizontal ||
+        !header.fits ||
+        header.labels !== "AI Researcher | AI Engineer" ||
+        header.active !== destination
+      )
+        failures.push(
+          `${route.path} ${name} → ${destination}: inconsistent or unstyled role navigation ${JSON.stringify(header)}`,
+        );
+      if ((await page.locator("html").getAttribute("lang")) !== route.locale)
+        failures.push(
+          `${route.path} ${name} → ${destination}: role switch changed language`,
+        );
+    }
     await context.close();
   }
 }
